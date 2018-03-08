@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  eventpublisherapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - EventBusConnection=${EVENT_SERVICE_BUS:-rabbitmq}
+      - EventBusUserName=${EVENT_SERVICE_BUS_USERNAME}
+      - EventBusPassword=${EVENT_SERVICE_BUS_PASSWORD}    
+    ports:
+      - "80"
+
+  eventconsumerapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

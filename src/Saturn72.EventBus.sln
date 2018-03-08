@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqEventBus", "RabbitM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Common.UnitTests", "EventBus.Common.UnitTests\EventBus.Common.UnitTests.csproj", "{BB972C57-3529-4674-98B2-2D9143A1E55F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{78A61F4C-5944-4AC3-A20E-AE5F45F187E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPublisherApp", "Sample\EventPublisherApp\EventPublisherApp.csproj", "{7E45D41A-66FA-444D-A993-CF81568C9585}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A3406096-DE9E-4744-9D71-F0933BFAFCD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventConsumerApp", "Sample\EventConsumerApp\EventConsumerApp.csproj", "{DEEE1C3F-2411-4802-A735-B518F02CE049}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +35,25 @@ Global
 		{BB972C57-3529-4674-98B2-2D9143A1E55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB972C57-3529-4674-98B2-2D9143A1E55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB972C57-3529-4674-98B2-2D9143A1E55F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E45D41A-66FA-444D-A993-CF81568C9585}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E45D41A-66FA-444D-A993-CF81568C9585}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E45D41A-66FA-444D-A993-CF81568C9585}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E45D41A-66FA-444D-A993-CF81568C9585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3406096-DE9E-4744-9D71-F0933BFAFCD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3406096-DE9E-4744-9D71-F0933BFAFCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3406096-DE9E-4744-9D71-F0933BFAFCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3406096-DE9E-4744-9D71-F0933BFAFCD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEEE1C3F-2411-4802-A735-B518F02CE049}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEEE1C3F-2411-4802-A735-B518F02CE049}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEEE1C3F-2411-4802-A735-B518F02CE049}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEEE1C3F-2411-4802-A735-B518F02CE049}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7E45D41A-66FA-444D-A993-CF81568C9585} = {78A61F4C-5944-4AC3-A20E-AE5F45F187E7}
+		{DEEE1C3F-2411-4802-A735-B518F02CE049} = {78A61F4C-5944-4AC3-A20E-AE5F45F187E7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {14C234A2-0FC1-4DAA-B386-406A75ABAAE9}
