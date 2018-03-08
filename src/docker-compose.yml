@@ -3,6 +3,8 @@ version: '3'
 services:
   eventpublisherapp:
     image: eventpublisherapp
+    ports:
+      - "32822:32822"
     build:
       context: .
       dockerfile: Sample/EventPublisherApp/Dockerfile
@@ -11,6 +13,8 @@ services:
 
   eventconsumerapp:
     image: eventconsumerapp
+    ports:
+      - "32821:32821"
     build:
       context: .
       dockerfile: Sample/EventConsumerApp/Dockerfile

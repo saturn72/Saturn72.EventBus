@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using EventBus.Common;
+using EventPublisherApp.IntegrationEvents;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventPublisherApp.Controllers

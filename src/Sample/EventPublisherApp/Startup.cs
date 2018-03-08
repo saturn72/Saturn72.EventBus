@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using EventBus.Common;
+using EventBus.Common.Subscriptions;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMqEventBus;
+using RabbitMqEventBus.Config;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace EventPublisherApp
@@ -29,9 +33,26 @@ namespace EventPublisherApp
 
         private void RegisterEventBus(IServiceCollection services)
         {
-             services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
+            services.Configure<EventPublisherAppSettings>(Configuration);
+
+            services.AddScoped<IEventBus, RabbitMqEventBus.EventBus>();
+            services.AddScoped<ISubscriptionsManager, InMemorySubscriptionsManager>();
+            services.AddSingleton(sp =>
+            {
+                var appSettings = sp.GetService<IOptions<EventPublisherAppSettings>>().Value;
+
+                var retryCount = 20;
+                if (!string.IsNullOrEmpty(Configuration["EventBusRetryCount"]))
                 {
-                    //var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+                    retryCount = int.Parse(Configuration["EventBusRetryCount"]);
+                }
+
+                return new RabbitMqConfig(appSettings.BrokerName, appSettings.ExchangeType, appSettings.QueueName, (uint)retryCount);
+            });
+            services.AddSingleton<IRabbitMQPersistentConnection>(sp =>
+                {
+                    var logger = sp.GetRequiredService<ILogger<DefaultRabbitMQPersistentConnection>>();
+                    var rmqConfig = sp.GetService<RabbitMqConfig>();
 
                     var factory = new ConnectionFactory()
                     {
@@ -48,14 +69,8 @@ namespace EventPublisherApp
                         factory.Password = Configuration["EventBusPassword"];
                     }
 
-                    var retryCount = 5;
-                    if (!string.IsNullOrEmpty(Configuration["EventBusRetryCount"]))
-                    {
-                        retryCount = int.Parse(Configuration["EventBusRetryCount"]);
-                    }
-
-                    throw new System.NotImplementedException();
-                    //return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
+                    
+                    return new DefaultRabbitMQPersistentConnection(factory, logger, rmqConfig);
                 });
         }
 

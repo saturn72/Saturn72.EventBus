@@ -2,9 +2,16 @@
 {
     public class RabbitMqConfig
     {
-        public string BrokerName { get; set; }
-        public string ExchangeType { get; set; }
-        public string QueueName { get; set; }
-        public int MaxRetries { get; set; }
+        public RabbitMqConfig(string brokerName, string exchangeName, string queueName, uint maxRetries)
+        {
+            BrokerName = brokerName;
+            ExchangeType = exchangeName;
+            QueueName = queueName;
+            MaxRetries = (int)maxRetries;
+        }
+        public string BrokerName { get; }
+        public string ExchangeType { get; }
+        public string QueueName { get; }
+        public int MaxRetries { get; }
     }
 }
